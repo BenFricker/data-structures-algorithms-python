@@ -422,6 +422,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 **⭐ Star this repository if you find it helpful!**
 
-Built with 💻 and ☕ by Ben Fricker
+Built by Ben Fricker 💻
 
 </div>
