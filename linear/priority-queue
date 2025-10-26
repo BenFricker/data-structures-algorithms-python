@@ -1,0 +1,75 @@
+class PriorityQueue:
+  """
+  Priority Queue: Min Heap
+  """
+  def __init__(self):
+    # Initialise heap
+    self.heap = []
+    self.size = 0
+
+  def is_empty(self):
+    """Check if heap is empty"""
+    return self.size == 0
+
+  def enqueue(self, node):
+    """Add node to heap"""
+    self.heap.append(node)
+    self.size += 1
+    self.siftUp(self.size - 1)
+
+  def dequeue(self):
+    """Remove & return node from heap"""
+    # Check for empty heap
+    if self.is_empty():
+      return None
+
+    # Swap root & last node, remove & return old root then decrement size
+    self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
+    next_node = self.heap.pop()
+    self.size -= 1
+
+    # Sift new root down
+    if self.size > 0:
+      self.siftDown(0)
+
+    return next_node
+
+  def siftUp(self, index):
+    """Sift nodes up the heap"""
+    if index == 0:
+      return
+
+    # Initialise parent node
+    parent = (index - 1) // 2
+
+    # If current node is more than parent then return, otherwise swap
+    if self.heap[index] > self.heap[parent]:
+      return
+    else:
+      self.heap[index], self.heap[parent] = self.heap[parent], self.heap[index]
+
+      # Recursively sift up
+      self.siftUp(parent)
+
+  def siftDown(self, index):
+    """Sift nodes down the heap"""
+
+    # Initialise smallest, left & right children
+    left_child = (index * 2) + 1
+    right_child = (index * 2) + 2
+    smallest_node = index
+
+    # If left child exists and smaller than current node
+    if left_child < self.size and self.heap[left_child] < self.heap[smallest_node]:
+      # Assign smallest node to left child
+      smallest_node = left_child
+
+    # If right child exists and smaller than current node & left child
+    if right_child < self.size and self.heap[right_child] < self.heap[smallest_node]:
+      # Assign smallest node to right child
+      smallest_node = right_child
+
+    # If index remains smallest node
+    if smallest_node!= index:
+      self.heap[index], self.heap[smallest_node] = self.heap[smallest_node], self.heap[index]
+      self.siftDown(smallest_node)
